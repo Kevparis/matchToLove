@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\NotificationRepository;
+use App\Repository\TchatMessagesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=NotificationRepository::class)
+ * @ORM\Entity(repositoryClass=TchatMessagesRepository::class)
  */
-class Notification
+class TchatMessages
 {
     /**
      * @ORM\Id
@@ -18,21 +18,16 @@ class Notification
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="notifications")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tchatMessages")
      */
     private $sender;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Suppress")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $subject;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="notifications")
-     */
-
-
     private $receiver;
+
 
     public function getId(): ?int
     {
@@ -47,18 +42,6 @@ class Notification
     public function setSender(?User $sender): self
     {
         $this->sender = $sender;
-
-        return $this;
-    }
-
-    public function getSubject(): ?string
-    {
-        return $this->subject;
-    }
-
-    public function setSubject(string $subject): self
-    {
-        $this->subject = $subject;
 
         return $this;
     }

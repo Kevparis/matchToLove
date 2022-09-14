@@ -273,10 +273,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $notifications;
 
+    /**
+     * @ORM\OneToMany(targetEntity=TchatMessages::class, mappedBy="sender")
+     */
+    private $tchatMessages;
+
 
     public function __construct()
     {
         $this->notifications = new ArrayCollection();
+        $this->tchatMessages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -920,35 +926,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Tchat>
-     */
-    public function getTchats(): Collection
-    {
-        return $this->tchats;
-    }
-
-    public function addTchat(Tchat $tchat): self
-    {
-        if (!$this->tchats->contains($tchat)) {
-            $this->tchats[] = $tchat;
-            $tchat->setPseudo($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTchat(Tchat $tchat): self
-    {
-        if ($this->tchats->removeElement($tchat)) {
-            // set the owning side to null (unless already changed)
-            if ($tchat->getPseudo() === $this) {
-                $tchat->setPseudo(null);
-            }
-        }
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, Notification>
@@ -979,4 +957,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, TchatMessages>
+     */
+    public function getTchatMessages(): Collection
+    {
+        return $this->tchatMessages;
+    }
+
+    public function addTchatMessage(TchatMessages $tchatMessage): self
+    {
+        if (!$this->tchatMessages->contains($tchatMessage)) {
+            $this->tchatMessages[] = $tchatMessage;
+            $tchatMessage->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTchatMessage(TchatMessages $tchatMessage): self
+    {
+        if ($this->tchatMessages->removeElement($tchatMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($tchatMessage->getSender() === $this) {
+                $tchatMessage->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
