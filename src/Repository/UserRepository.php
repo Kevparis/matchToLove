@@ -80,4 +80,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findBySexW(string $femme){
+    return $this->createQueryBuilder('u')
+    ->where('u.sex LIKE :femme')
+    ->setParameter('femme' , "%femme%") //mot avant ou apres
+    ->getQuery()
+    ->getResult();
+
+    //SELECT * FROM user WHERE user.roles LIKE "%role%"
+}
+
+public function findBySexM(string $homme){
+    return $this->createQueryBuilder('u')
+    ->where('u.sex LIKE :homme')
+    ->setParameter('homme' , "%homme%") //mot avant ou apres
+    ->getQuery()
+    ->getResult();
+
+    //SELECT * FROM user WHERE user.roles LIKE "%role%"
+}
 }

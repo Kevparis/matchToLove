@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+<section class="container">
+        <h2>Trouver l'amour de votre vie</h2>
+        <div class="row">
+            {% for users in user_all %}
+            <div class="card m-2 img-article" style="width: 18rem;">
+                <img src="{{asset('uploads/images/' ~ users.mainPicture)}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{users.pseudo }}</h5>
+                    <p class="card-text">{{ users.sex }}</p>
+                    <p class="card-text">{{ users.nationality }}</p>
+                    <a href="{{path('app_single_user',{id: users.id})}}" class="btn btn-primary">Voir le profil</a>
+                     <a href="{{path('app_single_user',{id: users.id})}}" class="btn text-light" id="bouttonjaime">j'aime</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</section>
+{% endblock %}

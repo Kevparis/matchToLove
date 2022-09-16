@@ -1,12 +1,69 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
-{% endblock %}
+{% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-	<div class="example-wrapper">
-		<h1>Hello
-			{{ controller_name }}! ✅</h1>
-	</div>
+<div class="container-fluid" style="background-image: url('assets/images/amour13.jpg'); background-repeat: no-repeat; background-size: contain; width: 100%;" id="premiereImage">
+<h1>MATCH 2LOVE</h1>
+<h2>Rencontre Sérieuse, Amour Fou</h2>
+</div>
 
+<div class="container-fluid" id="trouverAmour">
+<h3>Trouvez l'amour sur notre site de rencontre</h3>
+</div>
+
+<div class="container-fluid">
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <div class="card h-100">
+        <img src="assets/images/amour1.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Nos vraies histoires</h5>
+            <p class="card-text">Chaque rencontre racontée avec vos propres mots est unique, drôle, émouvante. Elles sont la preuve que faire des rencontres en ligne entre célibataires prêts à s’engager dans une vraie histoire, cela arrive bel et bien tous les jours.</p>
+        </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100">
+        <img src="assets/images/amour3.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Rechercher la Personne<br> qu'il vous faut</h5>
+            <p class="card-text">Rencontrez la personne qui vous correspond vraiment grâce à la recherche détaillée. Découvrez notre sélection personnalisée de profils détaillés. Venez rencontrer les célibataires à nos soirées et ateliers Meetic !</p>
+        </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100">
+        <img src="assets/images/amour9.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Discutez</h5>
+            <p class="card-text">Vous ne savez pas comment démarrer la conversation? Parler du petit détail qui vous a interpellé(e) sur son  profil ou de vos points communs sont de bons moyens de briser la glace. Ou alors partagez une musique, un GIF. Soyez inventifs! N’hésitez pas à consulter nos articles conseils pour maximiser l’attractivité de votre profil et apprendre à briser la glace.</p>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div id="separation">
+</div>
+
+</div>
+    <div class="container-fluid d-flex" id="proposition">
+        <div class="m-5">
+            <img src="assets/images/amour14.jpg" class="w-80%" alt="...">
+        </div>
+        <div>
+        <div class="w-80% m-5" id="paragraphe">
+            <h5>Match2Love est plus qu’un simple <br>site de rencontres sérieux.</h5>
+                <p>Nous proposons de véritables outils de recherche pour vous aider à mettre toutes les chances de votre côté de trouver les célibataires qui vous correspondent mais aussi des Coachings et des Live streamings réalisés avec des experts pour vous aider à valoriser vos atouts pour aborder votre quête d’une rencontre amoureuse en ayant confiance en vous et en vos qualités. Car croyez-en notre expérience, la clé de la réussite pour vivre une relation à deux, c’est de croire d’abord en vous.</p>
+                {% if app.user %}
+                <p><a class="text-light" href="{{path('app_user')}}">Voir plus >>></a></p>
+                {% else %}
+                <p><a class="text-light" href="{{path('app_login')}}">Voir plus >>></a></p>
+                {% endif %}
+        </div>  
+      </div>
+    </div>
+
+    <div id="separation">
+</div>
 {% endblock %}

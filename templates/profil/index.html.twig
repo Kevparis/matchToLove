@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page profil{% endblock %}
+
+{% block body %}
+        
+{# app.user contien l'utilisateur connecter est bien sur les informations de celui-ci #}
+<h1 class="text-center text-muted"> Bienvenue <strong class="text-dark">{{app.user.lastname}} {{app.user.firstname}}</strong></h1>
+    <section>
+        <div class="container px-4 px-lg-5 my-5 d-flex">
+            <div class="m-5">
+                <a href="{{path('app_profil')}}">Mes photos</a><br>
+                <a href="{{path('app_user')}}">Voir tous les Match2Love</a><br>
+                <a href="{{path('app_edit_user', {id: app.user.id})}}">Editer mon compte</a><br> 
+            </div>
+            <div class="col-md-6">
+                    <img
+                    class="card-img-top mb-5 mb-md-0"
+                    src="{{ asset('uploads/images/' ~ app.user.mainPicture)}}"
+                    alt="..."/>
+            </div>
+        </div>
+    </section>
+{% endblock %}

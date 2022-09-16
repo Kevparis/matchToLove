@@ -1,7 +1,5 @@
 nav{
-    color : rgb(255, 0, 106);
-    margin: 8px;
-    padding : 32px;
+
     background-color: black;
 }
 
@@ -10,73 +8,91 @@ nav{
     background-color: black;
 }
 
-.downlink{
-    color : #0d6efd !important;
-    background-color: whitesmoke !important;
+#premiereImage{
+  width: auto;
+  padding: 200px;
+  height: 800px;
+  color: white;
+  text-align: start;
 }
 
-.footerBlock{
-    color : rgb(255, 0, 106);
-    margin: 8px;
-    padding : 32px;
-    background-color: black;
+#premiereImage h1{
+  font-size: 90px;
 }
 
-/* nav{
-    color : white;
-    margin: 8px;
-    padding : 32px;
-    border: solid black 4px;
-    border-radius: 8px;
-    background-color: rgb(255, 0, 106);
+.card-body{
+  background-color: rgba(91, 91, 217, 0.777);
 }
 
-.SiteTitleNav, .upnavlink, .downlink{
-    color : white !important;
-    background-color: rgb(255, 0, 106);
-} */
-
-:hover, :focus {
-  color: dropdown-link-hover-color;
-  text-decoration: if($link-hover-decoration == underline, none, null);
-  @include gradient-bg($dropdown-link-hover-bg);
+.card-body p{
+  margin: 5px;
+  color: white;
+  font-style: italic;
+  font-size: 20px;
 }
 
-&.active,
-&:active {
-  color: $dropdown-link-active-color;
+.card-body h5{
+font-size: 40px;
+}
+
+#trouverAmour{
+  height: 150px;
+}
+
+#trouverAmour h3{
+  font-size: 50px;
+  text-align: center;
+  color: rgb(210, 21, 94);
+  padding: 0px 0px 40px 0px;
+}
+
+#proposition{
+  background-color: rgb(210, 88, 184);
+}
+
+#separation{
+  height: 350px;
+}
+
+#proposition{
+  height: 500px;
+ 
+  justify-content: center;
+  align-items: center;
+}
+
+#paragraphe h5{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#paragraphe p{
+  font-size: 20px;
+  font-style: italic;
+}
+
+#footerG{
+  background-color: rgb(90, 90, 90);
+}
+
+#monFooter a{
   text-decoration: none;
-  @include gradient-bg($dropdown-link-active-bg);
+  color: rgba(255, 192, 203, 0.748);
 }
 
-&.disabled,
-&:disabled {
-  color: $dropdown-link-disabled-color;
-  pointer-events: none;
-  background-color: transparent;
-  // Remove CSS gradients if they're enabled
-  background-image: if($enable-gradients, none, null);
-}
+#pageRegister{
+  background-color: rgb(244, 237, 237);
 }
 
+#backgroundcardMan{
+  background-color: rgb(111, 111, 209);
+}
 
-.dropdown-item {
-    color: $dropdown-dark-link-color;
+#backgroundcardWom{
+  background-color: rgb(186, 62, 172);
+}
 
-    &:hover,
-    &:focus {
-      color: $dropdown-dark-link-hover-color;
-      @include gradient-bg($dropdown-dark-link-hover-bg);
-    }
-
-    &.active,
-    &:active {
-      color: $dropdown-dark-link-active-color;
-      @include gradient-bg($dropdown-dark-link-active-bg);
-    }
-
-    &.disabled,
-    &:disabled {
-      color: $dropdown-dark-link-disabled-color;
-    }
-  }
+#bouttonjaime{
+  background-color: rgb(186, 62, 172);
+  border-color: white;
+}

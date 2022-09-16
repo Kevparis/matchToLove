@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RegisterController!{% endblock %}
+
+{% block body %}
+<section id="pageRegister" >
+<h1 class="text-center text-muted">Inscription</h1>
+    <div class="col-md-4 mx-auto">
+    {{form(registerForm)}}
+    </div>
+</section>
+{% endblock %}

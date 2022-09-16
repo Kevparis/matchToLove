@@ -28,6 +28,17 @@ class TchatMessages
      */
     private $receiver;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $publishedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="yes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
 
     public function getId(): ?int
     {
@@ -54,6 +65,30 @@ class TchatMessages
     public function setReceiver(?User $receiver): self
     {
         $this->receiver = $receiver;
+
+        return $this;
+    }
+
+    public function getPublishedAt(): ?\DateTimeInterface
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(\DateTimeInterface $publishedAt): self
+    {
+        $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

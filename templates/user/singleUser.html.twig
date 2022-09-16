@@ -1,0 +1,46 @@
+    {% extends 'base.html.twig' %} 
+
+    {% block title %} Profile {% endblock %} 
+    {% block body %}
+    <section class="py-5" id="pageRegister">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+        <div class="col-md-6">
+            <img
+            class="card-img-top mb-5 mb-md-0"
+            src="{{ asset('uploads/images/' ~ single_user.mainPicture)}}"
+            alt="..."
+            />
+        </div>
+        <div class="col-md-6">
+
+            <div class="small mb-1">
+            Inscrit depuis le : {{single_user.createdAt | date('d-m-y')}} 
+            </div>
+            <h1 class="display-5 fw-bolder">{{ single_user.pseudo}}</h1>
+            <div class="fs-5 mb-5">
+            <span>
+                Nom :           {{ single_user.lastname }}<br>
+                Prenom :        {{ single_user.firstname }}<br>
+                Profession :    {{ single_user.job }}<br>
+                Sport preferé : {{ single_user.sport }}<br>
+                Taille :        {{ single_user.size }}
+                </span>
+            </div>
+            <p class="lead">{{single_user.sex }}</p>
+            <div class="d-flex">
+            <button
+                class="btn btn-outline-dark flex-shrink-0"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+            >
+                <i class="bi-cart-fill me-1"></i><a href="{{path('app_tchat_messages')}}">
+                Ecrire à {{single_user.pseudo}}</a>
+            </button>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+{% endblock %} 

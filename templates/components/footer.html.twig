@@ -1,3 +1,45 @@
+
 <footer>
-	<div class="container-fluid footerBlock mx-auto fixed-bottom d-flex justify-content-center">Mon footer</div>
+    <div class="container-fluid w-100% text-light" id="footerG" >
+        <div class="footerf text-center p-3">
+            <h3>Commencez à rencontrer dès aujourd’hui des <br> célibataires prêts à s’engager</h3>
+        </div>
+        <div>
+            <div class="container-fluid d-flex justify-content-center text-light p-5" id="monFooter">
+                <div class="listes mx-5">
+                {% if app.user %}
+                    <ul style="list-style-type:none;">
+                        <h5>Faire des rencontres sur Match2Love</h5>
+                        <li><a href="{{path('app_man_user')}}">Chercher un homme</a></li>
+                        <li><a href="{{path('app_woman_user')}}">Chercher une femme</a></li>
+                        <li><a href="{{path('app_user')}}">Voir tout</a></li>
+                    </ul>
+                    {% else %}
+                    <ul style="list-style-type:none;">
+                        <h5>Faire des rencontres sur Match2Love</h5>
+                        <li><a href="{{path('app_login')}}">Chercher un homme</a></li>
+                        <li><a href="{{path('app_login')}}">Chercher une femme</a></li>
+                        <li><a href="{{path('app_login')}}">Voir tout</a></li>
+                    </ul>
+                    {% endif %}    
+                </div>
+                <div class="listes mx-5">
+                    <ul style="list-style-type:none;">
+                        <h5>Liens utiles</h5>
+                        <li><a href="{{path('app_home')}}">Les belles histoires</a></li>
+                        <li><a href="{{path('app_home')}}">Contacts</a></li>
+                        <li><a href="#">Besoin d'aide ?</a></li>
+                        <li><a href="#">Mentions legales</a></li>
+                    </ul>
+                </div>
+                <div class="listes mx-5">                    
+                    <ul style="list-style-type:none;">
+                        <h5>Trouvez votre amour</h5>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>

@@ -58,7 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $sex;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="datetime", length=30)
      */
     private $birthday;
 
@@ -68,89 +68,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $adress;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="string")
      */
     private $size;
 
-    /**
-     * @ORM\Column(type="string", length=25)
-     */
-    private $ethnicalOrigin;
-
-    /**
-     * @ORM\Column(type="string", length=25, nullable=true)
-     */
-    private $eyesColor;
-
-    /**
-     * @ORM\Column(type="string", length=25, nullable=true)
-     */
-    private $hairSLength;
-
-    /**
-     * @ORM\Column(type="string", length=25, nullable=true)
-     */
-    private $hairSColor;
-
-    /**
-     * @ORM\Column(type="string", length=25, nullable=true)
-     */
-    private $religion;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $mainPicture;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $picture2;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $picture3;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $picture4;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $picture5;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $picture6;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $picture7;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $picture8;
-
-    /**
-     * @ORM\Column(type="string", length=25)
-     */
-    private $maritalStatus;
-
-    /**
-     * @ORM\Column(type="string", length=15)
-     */
-    private $havingKids;
-
-    /**
-     * @ORM\Column(type="string", length=15, nullable=true)
-     */
-    private $wantKids;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
@@ -168,11 +94,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $smoke;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $weight;
-
-    /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $nationality;
@@ -188,69 +109,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $sport;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $hobbies;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $mostAttractiveInOneself;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $silhouette;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $genderIdentity;
-
-    /**
-     * @ORM\Column(type="string", length=80, nullable=true)
-     */
-    private $musicalTaste;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $pets;
-
-    /**
-     * @ORM\Column(type="string", length=80, nullable=true)
-     */
-    private $outings;
-
-    /**
-     * @ORM\Column(type="string", length=25, nullable=true)
-     */
-    private $dietType;
-
-    /**
-     * @ORM\Column(type="string", length=40, nullable=true)
-     */
-    private $income;
-
-    /**
-     * @ORM\Column(type="string", length=30, nullable=true)
-     */
-    private $religionPracticeLevel;
-
-    /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $job;
-
-    /**
-     * @ORM\Column(type="string", length=30, nullable=true)
-     */
-    private $style;
-
-    /**
-     * @ORM\Column(type="string", length=40, nullable=true)
-     */
-    private $myLittleFlaw;
 
     /**
      * @ORM\Column(type="datetime")
@@ -278,11 +139,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $tchatMessages;
 
+    /**
+     * @ORM\OneToMany(targetEntity=TchatMessages::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $yes;
+
 
     public function __construct()
     {
         $this->notifications = new ArrayCollection();
         $this->tchatMessages = new ArrayCollection();
+        $this->yes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -344,7 +211,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getPassword(): string
     {
-        return $this->password;
+        return (string) $this->password;
     }
 
     public function setPassword(string $password): self
@@ -422,12 +289,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getBirthday(): ?string
+    public function getBirthday(): ?\DateTimeInterface
     {
         return $this->birthday;
     }
 
-    public function setBirthday(string $birthday): self
+    public function setBirthday(\DateTimeInterface $birthday): self
     {
         $this->birthday = $birthday;
 
@@ -446,74 +313,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSize(): ?int
+    public function getSize(): ?string
     {
         return $this->size;
     }
 
-    public function setSize(int $size): self
+    public function setSize(string $size): self
     {
         $this->size = $size;
-
-        return $this;
-    }
-
-    public function getEthnicalOrigin(): ?string
-    {
-        return $this->ethnicalOrigin;
-    }
-
-    public function setEthnicalOrigin(string $ethnicalOrigin): self
-    {
-        $this->ethnicalOrigin = $ethnicalOrigin;
-
-        return $this;
-    }
-
-    public function getEyesColor(): ?string
-    {
-        return $this->eyesColor;
-    }
-
-    public function setEyesColor(?string $eyesColor): self
-    {
-        $this->eyesColor = $eyesColor;
-
-        return $this;
-    }
-
-    public function getHairSLength(): ?string
-    {
-        return $this->hairSLength;
-    }
-
-    public function setHairSLength(?string $hairSLength): self
-    {
-        $this->hairSLength = $hairSLength;
-
-        return $this;
-    }
-
-    public function getHairSColor(): ?string
-    {
-        return $this->hairSColor;
-    }
-
-    public function setHairSColor(?string $hairSColor): self
-    {
-        $this->hairSColor = $hairSColor;
-
-        return $this;
-    }
-
-    public function getReligion(): ?string
-    {
-        return $this->religion;
-    }
-
-    public function setReligion(?string $religion): self
-    {
-        $this->religion = $religion;
 
         return $this;
     }
@@ -526,126 +333,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMainPicture(?string $mainPicture): self
     {
         $this->mainPicture = $mainPicture;
-
-        return $this;
-    }
-
-    public function getPicture2(): ?string
-    {
-        return $this->picture2;
-    }
-
-    public function setPicture2(?string $picture2): self
-    {
-        $this->picture2 = $picture2;
-
-        return $this;
-    }
-
-    public function getPicture3(): ?string
-    {
-        return $this->picture3;
-    }
-
-    public function setPicture3(?string $picture3): self
-    {
-        $this->picture3 = $picture3;
-
-        return $this;
-    }
-
-    public function getPicture4(): ?string
-    {
-        return $this->picture4;
-    }
-
-    public function setPicture4(?string $picture4): self
-    {
-        $this->picture4 = $picture4;
-
-        return $this;
-    }
-
-    public function getPicture5(): ?string
-    {
-        return $this->picture5;
-    }
-
-    public function setPicture5(?string $picture5): self
-    {
-        $this->picture5 = $picture5;
-
-        return $this;
-    }
-
-    public function getPicture6(): ?string
-    {
-        return $this->picture6;
-    }
-
-    public function setPicture6(?string $picture6): self
-    {
-        $this->picture6 = $picture6;
-
-        return $this;
-    }
-
-    public function getPicture7(): ?string
-    {
-        return $this->picture7;
-    }
-
-    public function setPicture7(?string $picture7): self
-    {
-        $this->picture7 = $picture7;
-
-        return $this;
-    }
-
-    public function getPicture8(): ?string
-    {
-        return $this->picture8;
-    }
-
-    public function setPicture8(?string $picture8): self
-    {
-        $this->picture8 = $picture8;
-
-        return $this;
-    }
-
-    public function getMaritalStatus(): ?string
-    {
-        return $this->maritalStatus;
-    }
-
-    public function setMaritalStatus(string $maritalStatus): self
-    {
-        $this->maritalStatus = $maritalStatus;
-
-        return $this;
-    }
-
-    public function getHavingKids(): ?string
-    {
-        return $this->havingKids;
-    }
-
-    public function setHavingKids(string $havingKids): self
-    {
-        $this->havingKids = $havingKids;
-
-        return $this;
-    }
-
-    public function getWantKids(): ?string
-    {
-        return $this->wantKids;
-    }
-
-    public function setWantKids(?string $wantKids): self
-    {
-        $this->wantKids = $wantKids;
 
         return $this;
     }
@@ -686,18 +373,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getWeight(): ?int
-    {
-        return $this->weight;
-    }
-
-    public function setWeight(?int $weight): self
-    {
-        $this->weight = $weight;
-
-        return $this;
-    }
-
     public function getNationality(): ?string
     {
         return $this->nationality;
@@ -734,126 +409,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getHobbies(): ?string
-    {
-        return $this->hobbies;
-    }
-
-    public function setHobbies(?string $hobbies): self
-    {
-        $this->hobbies = $hobbies;
-
-        return $this;
-    }
-
-    public function getMostAttractiveInOneself(): ?string
-    {
-        return $this->mostAttractiveInOneself;
-    }
-
-    public function setMostAttractiveInOneself(?string $mostAttractiveInOneself): self
-    {
-        $this->mostAttractiveInOneself = $mostAttractiveInOneself;
-
-        return $this;
-    }
-
-    public function getSilhouette(): ?string
-    {
-        return $this->silhouette;
-    }
-
-    public function setSilhouette(string $silhouette): self
-    {
-        $this->silhouette = $silhouette;
-
-        return $this;
-    }
-
-    public function getGenderIdentity(): ?string
-    {
-        return $this->genderIdentity;
-    }
-
-    public function setGenderIdentity(string $genderIdentity): self
-    {
-        $this->genderIdentity = $genderIdentity;
-
-        return $this;
-    }
-
-    public function getMusicalTaste(): ?string
-    {
-        return $this->musicalTaste;
-    }
-
-    public function setMusicalTaste(?string $musicalTaste): self
-    {
-        $this->musicalTaste = $musicalTaste;
-
-        return $this;
-    }
-
-    public function getPets(): ?string
-    {
-        return $this->pets;
-    }
-
-    public function setPets(?string $pets): self
-    {
-        $this->pets = $pets;
-
-        return $this;
-    }
-
-    public function getOutings(): ?string
-    {
-        return $this->outings;
-    }
-
-    public function setOutings(?string $outings): self
-    {
-        $this->outings = $outings;
-
-        return $this;
-    }
-
-    public function getDietType(): ?string
-    {
-        return $this->dietType;
-    }
-
-    public function setDietType(?string $dietType): self
-    {
-        $this->dietType = $dietType;
-
-        return $this;
-    }
-
-    public function getIncome(): ?string
-    {
-        return $this->income;
-    }
-
-    public function setIncome(?string $income): self
-    {
-        $this->income = $income;
-
-        return $this;
-    }
-
-    public function getReligionPracticeLevel(): ?string
-    {
-        return $this->religionPracticeLevel;
-    }
-
-    public function setReligionPracticeLevel(?string $religionPracticeLevel): self
-    {
-        $this->religionPracticeLevel = $religionPracticeLevel;
-
-        return $this;
-    }
-
     public function getJob(): ?string
     {
         return $this->job;
@@ -862,30 +417,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setJob(?string $job): self
     {
         $this->job = $job;
-
-        return $this;
-    }
-
-    public function getStyle(): ?string
-    {
-        return $this->style;
-    }
-
-    public function setStyle(?string $style): self
-    {
-        $this->style = $style;
-
-        return $this;
-    }
-
-    public function getMyLittleFlaw(): ?string
-    {
-        return $this->myLittleFlaw;
-    }
-
-    public function setMyLittleFlaw(?string $myLittleFlaw): self
-    {
-        $this->myLittleFlaw = $myLittleFlaw;
 
         return $this;
     }
@@ -909,7 +440,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPaymentOption(string $paymentOption): self
     {
-        $this->paymentOption = $paymentOption;
+            $this->paymentOption = "free";
+        
+    
 
         return $this;
     }
@@ -982,6 +515,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($tchatMessage->getSender() === $this) {
                 $tchatMessage->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TchatMessages>
+     */
+    public function getYes(): Collection
+    {
+        return $this->yes;
+    }
+
+    public function addYe(TchatMessages $ye): self
+    {
+        if (!$this->yes->contains($ye)) {
+            $this->yes[] = $ye;
+            $ye->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeYe(TchatMessages $ye): self
+    {
+        if ($this->yes->removeElement($ye)) {
+            // set the owning side to null (unless already changed)
+            if ($ye->getUser() === $this) {
+                $ye->setUser(null);
             }
         }
 

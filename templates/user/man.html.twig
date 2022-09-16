@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+<section class="container">
+        <h2>Trouver l'homme de votre vie</h2>
+        <div class="row">
+        {# {% if app.user and app.user.roles ==["ROLE_USER"] %} #}
+            {% for musers in man_user %}
+            <div class="card m-2 img-article" style="width: 18rem;">
+                <img src="{{asset('uploads/images/' ~ musers.mainPicture)}}" class="card-img-top" alt="...">
+                <div class="card-body" id="backgroundcardMan">
+                    <h5 class="card-title">{{musers.pseudo }}</h5>
+                    <p class="card-text">{{ musers.sex }}</p>
+                    <p class="card-text">{{ musers.personalityTraits}}</p>
+                    <a href="{{path('app_single_user',{id: musers.id})}}" class="btn btn-dark">Voir le profil</a>
+                    <a href="{{path('app_single_user',{id: musers.id})}}" class="btn text-light" id="bouttonjaime">j'aime</a>
+                </div>
+            </div>
+            {% endfor %}
+        {# {% endif  %} #}
+        </div>
+</section>
+{% endblock %}
