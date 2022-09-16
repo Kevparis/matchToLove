@@ -28,6 +28,11 @@ class TchatMessages
      */
     private $receiver;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $publishedAt;
+
 
     public function getId(): ?int
     {
@@ -54,6 +59,18 @@ class TchatMessages
     public function setReceiver(?User $receiver): self
     {
         $this->receiver = $receiver;
+
+        return $this;
+    }
+
+    public function getPublishedAt(): ?\DateTimeInterface
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(\DateTimeInterface $publishedAt): self
+    {
+        $this->publishedAt = $publishedAt;
 
         return $this;
     }

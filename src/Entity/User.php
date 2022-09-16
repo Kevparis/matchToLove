@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -37,6 +38,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adress;
+
+
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $paymentOption;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $optionPrice;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity=Notification::class, mappedBy="sender")
+     */
+    private $notifications;
+
+    /**
+     * @ORM\OneToMany(targetEntity=TchatMessages::class, mappedBy="sender")
+     */
+    private $tchatMessages;
+
+
     /**
      * @ORM\Column(type="string", length=50)
      */
@@ -48,9 +84,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=30, unique=true)
+     * @ORM\Column(type="datetime", length=30)
      */
-    private $pseudo;
+    private $birthday;
 
     /**
      * @ORM\Column(type="string", length=25)
@@ -58,49 +94,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $sex;
 
     /**
-     * @ORM\Column(type="string", length=30)
-     */
-    private $birthday;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $adress;
-
-    /**
-     * @ORM\Column(type="smallint")
-     */
-    private $size;
-
-    /**
      * @ORM\Column(type="string", length=25)
      */
-    private $ethnicalOrigin;
+    private $country;
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
+     * @ORM\Column(type="string", length=50)
      */
-    private $eyesColor;
-
-    /**
-     * @ORM\Column(type="string", length=25, nullable=true)
-     */
-    private $hairSLength;
-
-    /**
-     * @ORM\Column(type="string", length=25, nullable=true)
-     */
-    private $hairSColor;
-
-    /**
-     * @ORM\Column(type="string", length=25, nullable=true)
-     */
-    private $religion;
+    private $erea;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $mainPicture;
+
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -138,145 +145,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $picture8;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=25, nullable=true)
      */
-    private $maritalStatus;
+    private $language;
 
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
-    private $havingKids;
-
-    /**
-     * @ORM\Column(type="string", length=15, nullable=true)
-     */
-    private $wantKids;
+    private $profileDescription;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
      */
-    private $levelOfStudies;
+    private $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=80, nullable=true)
+     * @ORM\ManyToOne(targetEntity=SensitiveData::class, inversedBy="users")
      */
-    private $languages;
-
-    /**
-     * @ORM\Column(type="string", length=25)
-     */
-    private $smoke;
-
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $weight;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $nationality;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $personalityTraits;
-
-    /**
-     * @ORM\Column(type="string", length=80, nullable=true)
-     */
-    private $sport;
-
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $hobbies;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $mostAttractiveInOneself;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $silhouette;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $genderIdentity;
-
-    /**
-     * @ORM\Column(type="string", length=80, nullable=true)
-     */
-    private $musicalTaste;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $pets;
-
-    /**
-     * @ORM\Column(type="string", length=80, nullable=true)
-     */
-    private $outings;
-
-    /**
-     * @ORM\Column(type="string", length=25, nullable=true)
-     */
-    private $dietType;
-
-    /**
-     * @ORM\Column(type="string", length=40, nullable=true)
-     */
-    private $income;
-
-    /**
-     * @ORM\Column(type="string", length=30, nullable=true)
-     */
-    private $religionPracticeLevel;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $job;
-
-    /**
-     * @ORM\Column(type="string", length=30, nullable=true)
-     */
-    private $style;
-
-    /**
-     * @ORM\Column(type="string", length=40, nullable=true)
-     */
-    private $myLittleFlaw;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="string", length=30)
-     */
-    private $paymentOption;
-
-    /**
-     * @ORM\Column(type="smallint")
-     */
-    private $optionPrice;
-
-
-    /**
-     * @ORM\OneToMany(targetEntity=Notification::class, mappedBy="sender")
-     */
-    private $notifications;
-
-    /**
-     * @ORM\OneToMany(targetEntity=TchatMessages::class, mappedBy="sender")
-     */
-    private $tchatMessages;
+    private $caracteristique;
 
 
     public function __construct()
@@ -374,6 +260,117 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(string $adress): self
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getPaymentOption(): ?string
+    {
+        return $this->paymentOption;
+    }
+
+    public function setPaymentOption(string $paymentOption): self
+    {
+        $this->paymentOption = $paymentOption;
+
+        return $this;
+    }
+
+    public function getOptionPrice(): ?int
+    {
+        return $this->optionPrice;
+    }
+
+    public function setOptionPrice(int $optionPrice): self
+    {
+        $this->optionPrice = $optionPrice;
+
+        return $this;
+    }
+
+
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getSender() === $this) {
+                $notification->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TchatMessages>
+     */
+    public function getTchatMessages(): Collection
+    {
+        return $this->tchatMessages;
+    }
+
+    public function addTchatMessage(TchatMessages $tchatMessage): self
+    {
+        if (!$this->tchatMessages->contains($tchatMessage)) {
+            $this->tchatMessages[] = $tchatMessage;
+            $tchatMessage->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTchatMessage(TchatMessages $tchatMessage): self
+    {
+        if ($this->tchatMessages->removeElement($tchatMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($tchatMessage->getSender() === $this) {
+                $tchatMessage->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getLastname(): ?string
     {
         return $this->lastname;
@@ -398,14 +395,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPseudo(): ?string
+    public function getBirthday(): ?DateTimeInterface
     {
-        return $this->pseudo;
+        return $this->birthday;
     }
 
-    public function setPseudo(string $pseudo): self
+    public function setBirthday(DateTimeInterface $birthday): self
     {
-        $this->pseudo = $pseudo;
+        $this->birthday = $birthday;
 
         return $this;
     }
@@ -422,98 +419,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getBirthday(): ?string
+    public function getCountry(): ?string
     {
-        return $this->birthday;
+        return $this->country;
     }
 
-    public function setBirthday(string $birthday): self
+    public function setCountry(string $country): self
     {
-        $this->birthday = $birthday;
+        $this->country = $country;
 
         return $this;
     }
 
-    public function getAdress(): ?string
+    public function getErea(): ?string
     {
-        return $this->adress;
+        return $this->erea;
     }
 
-    public function setAdress(string $adress): self
+    public function setErea(string $erea): self
     {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    public function getSize(): ?int
-    {
-        return $this->size;
-    }
-
-    public function setSize(int $size): self
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-
-    public function getEthnicalOrigin(): ?string
-    {
-        return $this->ethnicalOrigin;
-    }
-
-    public function setEthnicalOrigin(string $ethnicalOrigin): self
-    {
-        $this->ethnicalOrigin = $ethnicalOrigin;
-
-        return $this;
-    }
-
-    public function getEyesColor(): ?string
-    {
-        return $this->eyesColor;
-    }
-
-    public function setEyesColor(?string $eyesColor): self
-    {
-        $this->eyesColor = $eyesColor;
-
-        return $this;
-    }
-
-    public function getHairSLength(): ?string
-    {
-        return $this->hairSLength;
-    }
-
-    public function setHairSLength(?string $hairSLength): self
-    {
-        $this->hairSLength = $hairSLength;
-
-        return $this;
-    }
-
-    public function getHairSColor(): ?string
-    {
-        return $this->hairSColor;
-    }
-
-    public function setHairSColor(?string $hairSColor): self
-    {
-        $this->hairSColor = $hairSColor;
-
-        return $this;
-    }
-
-    public function getReligion(): ?string
-    {
-        return $this->religion;
-    }
-
-    public function setReligion(?string $religion): self
-    {
-        $this->religion = $religion;
+        $this->erea = $erea;
 
         return $this;
     }
@@ -529,6 +454,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 
     public function getPicture2(): ?string
     {
@@ -614,378 +540,51 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getMaritalStatus(): ?string
+    public function getLanguage(): ?string
     {
-        return $this->maritalStatus;
+        return $this->language;
     }
 
-    public function setMaritalStatus(string $maritalStatus): self
+    public function setLanguage(?string $language): self
     {
-        $this->maritalStatus = $maritalStatus;
+        $this->language = $language;
 
         return $this;
     }
 
-    public function getHavingKids(): ?string
+    public function getProfileDescription(): ?string
     {
-        return $this->havingKids;
+        return $this->profileDescription;
     }
 
-    public function setHavingKids(string $havingKids): self
+    public function setProfileDescription(?string $profileDescription): self
     {
-        $this->havingKids = $havingKids;
+        $this->profileDescription = $profileDescription;
 
         return $this;
     }
 
-    public function getWantKids(): ?string
+    public function getPhoneNumber(): ?string
     {
-        return $this->wantKids;
+        return $this->phoneNumber;
     }
 
-    public function setWantKids(?string $wantKids): self
+    public function setPhoneNumber(?string $phoneNumber): self
     {
-        $this->wantKids = $wantKids;
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
 
-    public function getLevelOfStudies(): ?string
+    public function getCaracteristique(): ?SensitiveData
     {
-        return $this->levelOfStudies;
+        return $this->caracteristique;
     }
 
-    public function setLevelOfStudies(?string $levelOfStudies): self
+    public function setCaracteristique(?SensitiveData $caracteristique): self
     {
-        $this->levelOfStudies = $levelOfStudies;
+        $this->caracteristique = $caracteristique;
 
         return $this;
     }
-
-    public function getLanguages(): ?string
-    {
-        return $this->languages;
-    }
-
-    public function setLanguages(?string $languages): self
-    {
-        $this->languages = $languages;
-
-        return $this;
-    }
-
-    public function getSmoke(): ?string
-    {
-        return $this->smoke;
-    }
-
-    public function setSmoke(string $smoke): self
-    {
-        $this->smoke = $smoke;
-
-        return $this;
-    }
-
-    public function getWeight(): ?int
-    {
-        return $this->weight;
-    }
-
-    public function setWeight(?int $weight): self
-    {
-        $this->weight = $weight;
-
-        return $this;
-    }
-
-    public function getNationality(): ?string
-    {
-        return $this->nationality;
-    }
-
-    public function setNationality(?string $nationality): self
-    {
-        $this->nationality = $nationality;
-
-        return $this;
-    }
-
-    public function getPersonalityTraits(): ?string
-    {
-        return $this->personalityTraits;
-    }
-
-    public function setPersonalityTraits(?string $personalityTraits): self
-    {
-        $this->personalityTraits = $personalityTraits;
-
-        return $this;
-    }
-
-    public function getSport(): ?string
-    {
-        return $this->sport;
-    }
-
-    public function setSport(?string $sport): self
-    {
-        $this->sport = $sport;
-
-        return $this;
-    }
-
-    public function getHobbies(): ?string
-    {
-        return $this->hobbies;
-    }
-
-    public function setHobbies(?string $hobbies): self
-    {
-        $this->hobbies = $hobbies;
-
-        return $this;
-    }
-
-    public function getMostAttractiveInOneself(): ?string
-    {
-        return $this->mostAttractiveInOneself;
-    }
-
-    public function setMostAttractiveInOneself(?string $mostAttractiveInOneself): self
-    {
-        $this->mostAttractiveInOneself = $mostAttractiveInOneself;
-
-        return $this;
-    }
-
-    public function getSilhouette(): ?string
-    {
-        return $this->silhouette;
-    }
-
-    public function setSilhouette(string $silhouette): self
-    {
-        $this->silhouette = $silhouette;
-
-        return $this;
-    }
-
-    public function getGenderIdentity(): ?string
-    {
-        return $this->genderIdentity;
-    }
-
-    public function setGenderIdentity(string $genderIdentity): self
-    {
-        $this->genderIdentity = $genderIdentity;
-
-        return $this;
-    }
-
-    public function getMusicalTaste(): ?string
-    {
-        return $this->musicalTaste;
-    }
-
-    public function setMusicalTaste(?string $musicalTaste): self
-    {
-        $this->musicalTaste = $musicalTaste;
-
-        return $this;
-    }
-
-    public function getPets(): ?string
-    {
-        return $this->pets;
-    }
-
-    public function setPets(?string $pets): self
-    {
-        $this->pets = $pets;
-
-        return $this;
-    }
-
-    public function getOutings(): ?string
-    {
-        return $this->outings;
-    }
-
-    public function setOutings(?string $outings): self
-    {
-        $this->outings = $outings;
-
-        return $this;
-    }
-
-    public function getDietType(): ?string
-    {
-        return $this->dietType;
-    }
-
-    public function setDietType(?string $dietType): self
-    {
-        $this->dietType = $dietType;
-
-        return $this;
-    }
-
-    public function getIncome(): ?string
-    {
-        return $this->income;
-    }
-
-    public function setIncome(?string $income): self
-    {
-        $this->income = $income;
-
-        return $this;
-    }
-
-    public function getReligionPracticeLevel(): ?string
-    {
-        return $this->religionPracticeLevel;
-    }
-
-    public function setReligionPracticeLevel(?string $religionPracticeLevel): self
-    {
-        $this->religionPracticeLevel = $religionPracticeLevel;
-
-        return $this;
-    }
-
-    public function getJob(): ?string
-    {
-        return $this->job;
-    }
-
-    public function setJob(?string $job): self
-    {
-        $this->job = $job;
-
-        return $this;
-    }
-
-    public function getStyle(): ?string
-    {
-        return $this->style;
-    }
-
-    public function setStyle(?string $style): self
-    {
-        $this->style = $style;
-
-        return $this;
-    }
-
-    public function getMyLittleFlaw(): ?string
-    {
-        return $this->myLittleFlaw;
-    }
-
-    public function setMyLittleFlaw(?string $myLittleFlaw): self
-    {
-        $this->myLittleFlaw = $myLittleFlaw;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getPaymentOption(): ?string
-    {
-        return $this->paymentOption;
-    }
-
-    public function setPaymentOption(string $paymentOption): self
-    {
-        $this->paymentOption = $paymentOption;
-
-        return $this;
-    }
-
-    public function getOptionPrice(): ?int
-    {
-        return $this->optionPrice;
-    }
-
-    public function setOptionPrice(int $optionPrice): self
-    {
-        $this->optionPrice = $optionPrice;
-
-        return $this;
-    }
-
-   
-
-    /**
-     * @return Collection<int, Notification>
-     */
-    public function getNotifications(): Collection
-    {
-        return $this->notifications;
-    }
-
-    public function addNotification(Notification $notification): self
-    {
-        if (!$this->notifications->contains($notification)) {
-            $this->notifications[] = $notification;
-            $notification->setSender($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNotification(Notification $notification): self
-    {
-        if ($this->notifications->removeElement($notification)) {
-            // set the owning side to null (unless already changed)
-            if ($notification->getSender() === $this) {
-                $notification->setSender(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, TchatMessages>
-     */
-    public function getTchatMessages(): Collection
-    {
-        return $this->tchatMessages;
-    }
-
-    public function addTchatMessage(TchatMessages $tchatMessage): self
-    {
-        if (!$this->tchatMessages->contains($tchatMessage)) {
-            $this->tchatMessages[] = $tchatMessage;
-            $tchatMessage->setSender($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTchatMessage(TchatMessages $tchatMessage): self
-    {
-        if ($this->tchatMessages->removeElement($tchatMessage)) {
-            // set the owning side to null (unless already changed)
-            if ($tchatMessage->getSender() === $this) {
-                $tchatMessage->setSender(null);
-            }
-        }
-
-        return $this;
-    }
-
 }

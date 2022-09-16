@@ -34,6 +34,16 @@ class Notification
 
     private $receiver;
 
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $alreadyread;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $publishedAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,6 +81,30 @@ class Notification
     public function setReceiver(?User $receiver): self
     {
         $this->receiver = $receiver;
+
+        return $this;
+    }
+
+    public function getAlreadyread(): ?string
+    {
+        return $this->alreadyread;
+    }
+
+    public function setAlreadyread(?string $alreadyread): self
+    {
+        $this->alreadyread = $alreadyread;
+
+        return $this;
+    }
+
+    public function getPublishedAt(): ?\DateTimeInterface
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(\DateTimeInterface $publishedAt): self
+    {
+        $this->publishedAt = $publishedAt;
 
         return $this;
     }

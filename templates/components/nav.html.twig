@@ -10,7 +10,7 @@
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link active upnavlink" aria-current="page" href="#">Accueil</a>
+					<a class="nav-link active upnavlink" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
 				</li>
 
 				<li class="nav-item dropdown">
@@ -35,7 +35,7 @@
 					<ul class="dropdown-menu">
 
 						<li>
-							<a class="dropdown-item downlink" href="#">Inscription</a>
+							<a class="dropdown-item downlink" href="{{ path('app_register') }}">Inscription</a>
 						</li>
 						<li>
 							<a class="dropdown-item downlink" href="#">Profil</a>
@@ -65,7 +65,7 @@
 					</ul>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active upnavlink" aria-current="page" href="#">Back-Office</a>
+					<a class="nav-link active upnavlink" aria-current="page" href="{{ path('app_backoffice') }}">Back-Office</a>
 				</li>
 			</ul>
 		</div>

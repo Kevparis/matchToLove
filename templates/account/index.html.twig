@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mon compte{% endblock %}
+
+{% block body %}
+<section>
+    <h1 class="text-center text-muted"> Bienvenue <strong class="text-dark">{{app.user.lastname}} {{app.user.firstname}}</strong></h1>
+    
+    <div class="m-5">
+    <a href="{{path('app_single_profile')}}">Ajouter un profil</a><br>
+    <a href="#">Voir tous mes profils</a>
+    <a href="#">Editer mes informations</a>
+    </div>
+
+</section>
+{% endblock %}
