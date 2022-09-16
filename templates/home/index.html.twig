@@ -1,12 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
+{% block title %}
+	PAGE D'ACCUEIL!
 {% endblock %}
 
 {% block body %}
-	<div class="example-wrapper">
-		<h1>Hello
-			{{ controller_name }}! ✅</h1>
-	</div>
+	<section class="jumbotron text-center">
+		<div class="container">
+			<h1 class="text-center text-muted">profils !</h1>
+			<p class="lead text-muted">Rencontrez enfin l'amour</p>
+			<p>
+				<a href="#" class="btn btn-primary my-2">Tous les profils</a>
+				<a href="#" class="btn btn-secondary my-2">Les nouveautés</a>
+			</p>
+		</div>
+	</section>
+
+	<section class="container">
+		<h2>Les derniers profils</h2>
+
+		<div class="row">
+
+			{% for profile in profiles %}
+
+				<div class="card m-2 img-profile" style="width: 18rem;">
+					<img src="{{asset('uploads/images/' ~ profile.mainPicture)}}" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">
+							{{profile.firstname ~ " " ~ profile.lastname}}</h5>
+						<p class="card-text">{{profile.description}}</p>
+						<a href="{{path('app_single_profile', {id: profile.id})}}" class="btn btn-primary">Voir</a>
+					</div>
+				</div>
+
+			{% endfor %}
+
+		</div>
+
+
+	</section>
 
 {% endblock %}

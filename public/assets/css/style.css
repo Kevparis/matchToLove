@@ -10,6 +10,10 @@ nav{
     background-color: black;
 }
 
+.upnavlink{
+  color : white !important;
+}
+
 .downlink{
     color : #0d6efd !important;
     background-color: whitesmoke !important;
@@ -36,6 +40,10 @@ nav{
     background-color: rgb(255, 0, 106);
 } */
 
+
+
+
+/* 
 :hover, :focus {
   color: dropdown-link-hover-color;
   text-decoration: if($link-hover-decoration == underline, none, null);
@@ -79,4 +87,4 @@ nav{
     &:disabled {
       color: $dropdown-dark-link-disabled-color;
     }
-  }
+  } */

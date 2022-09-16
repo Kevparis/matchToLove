@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de l'utilisateur
+{% endblock %}
+
+{% block body %}
+	<section>
+		<h1 class="text-center text-muted">Modification de
+			{{singleUser.firstname}}</h1>
+		<div class="col-md-4 mx-auto">
+
+
+			{{form_start(form)}}
+
+			{{form_row(form.email)}}
+			{{form_row(form.lastname)}}
+			{{form_row(form.firstname)}}
+			{% if app.user and app.user.email == singleUser.email %}
+				{{form_row(form.password)}}
+			{% else %}
+				{{form_row(form.password, {'attr' : {'disabled' : true}})}}
+				{# A la place de true, on peut mettre un 'true', ou un 'disabled' #}
+			{% endif %}
+			{{form_row(form.mainPicture)}}
+			{{form_row(form.Enregister)}}
+
+			{{form_end(form)}}
+
+
+		</div>
+
+	</section>
+{% endblock %}

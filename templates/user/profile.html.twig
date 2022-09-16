@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Profile
+{% endblock %}
+{% block
+body %}
+	<section class="py-5">
+		<div class="container px-4 px-lg-5 my-5">
+			<div class="row gx-4 gx-lg-5 align-items-center">
+				<div class="col-md-6">
+					<img class="card-img-top mb-5 mb-md-0" src="{{ asset('uploads/images/' ~ singleProfile.mainPicture)}}" alt="photo principale"/>
+				</div>
+				<div class="col-md-6">
+					<div class="small mb-1">
+						{{singleProfile.createdAt | date('d-m-y')}}
+					</div>
+					<h1 class="display-5 fw-bolder">{{ singleProfile.title}}</h1>
+					<div class="fs-5 mb-5">
+						<span>{{ singleProfile.author.lastname }}
+							{{ singleProfile.author.firstname }}</span>
+					</div>
+					<p class="lead">{{ singleProfile.profileDescription }}</p>
+					<div class="d-flex">
+						<button class="btn btn-outline-dark flex-shrink-0" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+							<i class="bi-cart-fill me-1"></i>
+							Ajouter un commentaire
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<hr/>
+	<section>
+		<h2>Commentaires</h2>
+		{% for commentaire in singleProfile.comments %}
+			<span class="m-5">
+				<strong>
+					{{commentaire.user.firstname ~ ' ' ~ commentaire.user.lastname}}
+				</strong>
+
+				{{commentaire.comment}}
+
+				<br>
+				<em class='m-5'>
+					{{'Le :' ~ commentaire.Profile.publishedAt| date('d-m-y')}}
+
+				</em>
+			</span>
+			<br>
+		{% endfor %}
+
+	</section>
+
+	<!-- Modal -->
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">
+						Nouveau commentaire
+					</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					{{form(form)}}
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

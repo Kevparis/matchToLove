@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription
+{% endblock %}
+
+{% block body %}
+	<section>
+		<h1 class="text-center text-muted">Inscription</h1>
+
+		{# Ici on ne va pas invoquer registerForm comme ça mais utiliser une fonction native form() car c'est un tableau de type formulaire et non pas un string classique #}
+
+		<div class="col-md-6 mx-auto">
+
+			{{form(registerForm)}}
+
+			</div>
+		</section>
+	{% endblock %}
